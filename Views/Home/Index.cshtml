@@ -1,0 +1,29 @@
+﻿@model Webscraper.Models.ScrapeSearch
+@{
+    ViewBag.Title = "Web Scraper";
+}
+
+<div class="jumbotron">
+    <h1>Infosystems webscraper</h1>
+    <p class="lead">Below is a simple webscraper that counts the number of times a certain phrase is found within a url</p>
+
+</div>
+
+@using (Html.BeginForm("Search", "Home"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.SearchString)
+        @Html.TextBoxFor(m => m.SearchString, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.URL)
+        @Html.TextBoxFor(m => m.URL, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Pages)
+        @Html.TextBoxFor(m => m.Pages, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+}
