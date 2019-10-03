@@ -13,6 +13,6 @@ namespace Webscraper.Models
 
         public int Counter { get; set; }
 
-        public int Pages { get; set; }
+
     }
 }

@@ -34,24 +34,21 @@ namespace Webscraper.Controllers
         [HttpPost]
         public ActionResult Search(ScrapeSearch scrapeSearch)
         {
-            int counter = 0;
-            string nextpageurl = "";
+
+           
+            int counter = 0;            
             WebClient web = new WebClient();
             string CurrURL = scrapeSearch.URL;
-            for (int i = 1; i <= scrapeSearch.Pages; i++) {
-                String html = web.DownloadString(CurrURL);
-                MatchCollection m1 = Regex.Matches(html, scrapeSearch.SearchString, RegexOptions.Singleline);
-                counter = counter + m1.Count;
-                MatchCollection m2 = Regex.Matches(html, @"<a class=""nBDE1b G5eFlf"" href=""(.+?)"" aria-", RegexOptions.Singleline);
-                foreach (Match match in m2)
+            
+                String html = web.DownloadString(CurrURL);                          
+                MatchCollection m3 = Regex.Matches(html, @"class=""ZINbbc xpd O9g5cc uUPGi""><div class=""kCrYT""><a href=(.+?)""", RegexOptions.Singleline);
+                foreach (Match m in m3) 
                 {
-                    nextpageurl = match.Groups[1].Value;
+                    if (m.Groups[1].Value.Contains(scrapeSearch.SearchString))
+                        counter++;
                 }
-                nextpageurl = nextpageurl.Replace("amp;","");
-                nextpageurl = "https://www.google.com" + nextpageurl;
-                CurrURL = nextpageurl;
-            }
             scrapeSearch.Counter = counter;
+            
             return View(scrapeSearch);
         }
     }
